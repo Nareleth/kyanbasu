@@ -1,5 +1,9 @@
 package main
 
+import (
+    "github.com/Nareleth/kyanbasu"
+)
+
 
 func main() {
     // Get values for terminal dimensions (width, height)

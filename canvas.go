@@ -51,7 +51,7 @@ func NewCanvas(x, y, width, height int) *Canvas {
         Height:     height,
         Writer:     bufio.NewWriter(os.Stdout),
         Back:       back,
-        Front:      front
+        Front:      front,
     }
 }
 

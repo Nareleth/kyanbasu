@@ -50,7 +50,7 @@ func NewPanel(x, y, width, height int, canvas *Canvas) *Panel {
     return &Panel {
         X:          x,
         Y:          y,
-        Width       width,
+        Width:      width,
         Height:     height,
         CanvasGrid: canvas.Back
     }
@@ -96,17 +96,17 @@ func (p *Panel) DrawBorders(canvas *Canvas) {
     for col := p.Y; col <= size; col++ {
         canvas.Move(p.X, col)
         switch col {
-            case p.Y    canvas.WriteRune(set.PanelNW)
-            case size   canvas.WriteRune(set.PanelSW)
-            default     canvas.WriteRune(set.PanelCol)
+            case p.Y:   canvas.WriteRune(set.PanelNW)
+            case size:  canvas.WriteRune(set.PanelSW)
+            default:    canvas.WriteRune(set.PanelCol)
         }
 
         // Repeat the same steps for the right column
         canvas.Move(length, col)
         switch col {
-            case p.Y    canvas.WriteRune(set.PanelNE)
-            case size   canvas.WriteRune(set.PanelSE)
-            default     canvas.WriteRune(set.PanelCol)
+            case p.Y:   canvas.WriteRune(set.PanelNE)
+            case size:  canvas.WriteRune(set.PanelSE)
+            default:    canvas.WriteRune(set.PanelCol)
         }
         
     }
