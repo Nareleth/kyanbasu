@@ -161,7 +161,11 @@ func (p *Panel) StyleBorders() PanelRunes {
 
 // Write text within a panel relative to the panel coordinates. Follows printf format.
 func (p *Panel) WriteText(x, y int, text string, args ...any) {
-    for i, char := range text {
+    // Create formatted string with args.
+    formatted := fmt.Sprintf(text, args...)
+
+    // Itterate through the range of chars and print them to the terminal.
+    for i, char := range formatted {
         p.SetCell(x + i, y, char)
     }
 }

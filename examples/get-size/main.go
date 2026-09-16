@@ -26,7 +26,7 @@ func main() {
     panel.DrawBorders(canvas)
 
     // Write the terminal dimensions to the first row of the panel
-    panel.WriteText(1, 1, "The Terminal size is (%d, %d)\n", w, h)
+    panel.WriteText(1, 1, "Terminal Size: (%d, %d)\n", w, h)
 
     // Flush the buffer content to the terminal and print it
     canvas.Flush()
