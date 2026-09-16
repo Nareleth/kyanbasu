@@ -7,16 +7,16 @@ import (
 
 func main() {
     // Get values for terminal dimensions (width, height)
-    w, h := GetSize()
+    w, h := kyanbasu.GetSize()
 
     // Initialize a new Canvas with the size of the terminal
-    canvas := NewCanvas(0, 0, w, h)
+    canvas := kyanbasu.NewCanvas(0, 0, w, h)
 
     // Initialize a single Panel with the full size of the canvas
-    panel := NewPanel(0, 0, w, h, canvas)
+    panel := kyanbasu.NewPanel(0, 0, w, h, canvas)
 
     // Style the panel with the light boxset
-    panel.Style = Light
+    panel.Style = kyanbasu.Light
 
     
     // Issue a screen clear in the canvas buffer

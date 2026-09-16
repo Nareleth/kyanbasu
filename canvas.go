@@ -58,7 +58,7 @@ func NewCanvas(x, y, width, height int) *Canvas {
 
 // Clear the terminal
 func (c *Canvas) Clear() {
-    fmt.Fprint(c.Writer, "\033[2H\033[H")
+    fmt.Fprint(c.Writer, "\033[2J\033[H")
 }
 
 
@@ -93,7 +93,7 @@ func (c *Canvas) Move(x, y int) {
 
 // Reveal the terminal cursor
 func (c *Canvas) ShowCursor() {
-    fmt.Frpint(c.Writer, "\033[?25h")
+    fmt.Fprint(c.Writer, "\033[?25h")
 }
 
 // Write a rune character directly to the terminal cursor location

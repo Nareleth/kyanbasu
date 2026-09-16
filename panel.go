@@ -52,7 +52,7 @@ func NewPanel(x, y, width, height int, canvas *Canvas) *Panel {
         Y:          y,
         Width:      width,
         Height:     height,
-        CanvasGrid: canvas.Back
+        CanvasGrid: canvas.Back,
     }
 }
 
@@ -127,6 +127,34 @@ func (p *Panel) SetCell(x, y int, char rune) error {
         return nil
     } else {
         return fmt.Errorf("Cell out of bounds.")
+    }
+}
+
+
+// Applies border Style
+func (p *Panel) StyleBorders() PanelRunes {
+    switch p.Style {
+        case Light:
+            return PanelRunes {
+                PanelRow:   RuneBoxLightRow,
+                PanelCol:   RuneBoxLightCol,
+                PanelNW:    RuneBoxLightNW,
+                PanelNE:    RuneBoxLightNE,
+                PanelSW:    RuneBoxLightSW,
+                PanelSE:    RuneBoxLightSE,
+            }
+
+        case Heavy:
+            return PanelRunes {
+                PanelRow:   RuneBoxHeavyRow,
+                PanelCol:   RuneBoxHeavyCol,
+                PanelNW:    RuneBoxHeavyNW,
+                PanelNE:    RuneBoxHeavyNE,
+                PanelSW:    RuneBoxHeavySW,
+                PanelSE:    RuneBoxHeavySE,
+            }
+
+        default: return PanelRunes{}
     }
 }
 
