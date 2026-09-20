@@ -13,9 +13,8 @@ Kyanbasu utilizes a cell-based grid built on panels within a canvas to have full
 - input
 
 ## Extra features:
-- cell color (fg and bg)
 - braille char sets
 
 ## Examples:
 - rain
-
+- colors

@@ -15,5 +15,7 @@ package kyanbasu
 // Cell type
 type Cell struct {
     Char    rune
+    FG      Color
+    BG      Color
 }
 
