@@ -115,8 +115,8 @@ func (p *Panel) DrawBorders(canvas *Canvas) {
 }
 
 
-// Set the value of a cell relative to the panel coordinates. This is the main method for drawing directly into the panel.
-func (p *Panel) SetCell(x, y int, char rune) error {
+// Set the value of a cell relative to the panel coordinates. This is the main method for drawing directly into the panel with custom runes.
+func (p *Panel) SetRune(x, y int, char rune) error {
     // Translate relative panel coords with absolute terminal position.
     AbsX := p.X + x
     AbsY := p.Y + y
@@ -130,6 +130,20 @@ func (p *Panel) SetCell(x, y int, char rune) error {
     }
 }
 
+// Draw a defined cell relative to the panel coordinates.
+func (p *Panel) SetCell(x, y int, cell Cell) error {
+    // Translate relative panel coords with absolute terminal position.
+    AbsX := p.X + x
+    AbsY := p.Y + y
+
+    // Check if the provided drawing coordinates are within the panel boundary
+    if AbsX >= p.X && AbsX < p.X + p.Width && AbsY >= p.Y && AbsY < p.Y + p.Height {
+        p.CanvasGrid[AbsY][AbsX] = cell
+        return nil
+    } else {
+        return fmt.Errorf("Cell out of bounds.")
+    }
+}
 
 // Applies border Style
 func (p *Panel) StyleBorders() PanelRunes {
@@ -166,6 +180,6 @@ func (p *Panel) WriteText(x, y int, text string, args ...any) {
 
     // Itterate through the range of chars and print them to the terminal.
     for i, char := range formatted {
-        p.SetCell(x + i, y, char)
+        p.SetRune(x + i, y, char)
     }
 }

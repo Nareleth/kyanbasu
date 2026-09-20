@@ -21,4 +21,11 @@ const (
     RuneBoxHeavyNE  = '\u2513'
     RuneBoxHeavySW  = '\u2517'
     RuneBoxHeavySE  = '\u251B'
+
+    
+    // -- Block --
+    RuneBlockFull       = '\u2588'
+    RuneBlockLight      = '\u2591'
+    RuneBlockMedium     = '\u2592'
+    RuneBlockDark       = '\u2593'
 )

@@ -70,10 +70,13 @@ func (c *Canvas) Flush() {
             if c.Front[y][x] != c.Back[y][x] {
                 c.Front[y][x] = c.Back[y][x]
                 c.Move(x, y)
-                c.WriteRune(c.Back[y][x].Char)
+                c.WriteCell(c.Back[y][x])
             }
         }
     }
+
+    // Reset cursor position
+    c.Move(0, c.Height +1)
 
     c.Writer.Flush()
 }
@@ -99,5 +102,10 @@ func (c *Canvas) ShowCursor() {
 // Write a rune character directly to the terminal cursor location
 func (c *Canvas) WriteRune(char rune) {
     fmt.Fprintf(c.Writer, "%c", char)
+}
+
+// Write a cell character directly to the terminal cursor location
+func (c *Canvas) WriteCell(cell Cell) {
+    fmt.Fprintf(c.Writer, "%s%s%c%s", cell.FG, cell.BG, cell.Char, Reset)
 }
 
