@@ -12,11 +12,38 @@ import (
 */
 
 
+/* Types*/
+
+// Raw
+type Raw struct {
+    fd      int
+    state   *term.State
+}
+
 /* Functions */
+
 
 // Get the size of the terminal
 func GetSize() (int, int) {
     width, height, _ := term.GetSize(int(os.Stdout.Fd()))
     return width, height
+}
+
+
+// Set Terminal to Raw Mode
+func RawMode(f *os.File) (*Raw, error) {
+    fd := int(f.Fd())
+
+    state, err := term.MakeRaw(fd)
+
+    if err != nil {
+        return nil, err
+    }
+    return &Raw{fd: fd, state: state}, nil
+}
+
+// Return terminal to normal
+func (r *Raw) RawClean() error {
+    return term.Restore(r.fd, r.state)
 }
 

@@ -17,4 +17,3 @@ Kyanbasu utilizes a cell-based grid built on panels within a canvas to have full
 
 ## Examples:
 - rain
-- colors
