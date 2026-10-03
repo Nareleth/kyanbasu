@@ -1,32 +1,11 @@
 # Kyanbasu~ (きゃんばす)
 ## Overview
-A go framework built for games and animations live in your terminal!
-Kyanbasu utilizes a cell-based grid built on panels within a canvas to have full control of every column and row.
+A go terminal ui (tui) framework built for games and animations live in your terminal!
+It utilizes a 4 layer tiered system to achieve fantastic results.
+The terminal layer is a driver for all underlying terminal manipulation.
 
 
 # TODO:
-## Terminal Layer: all underlying terminal manipulation
-- add description
-- term struct:
-    - old state
-    X- out (writer)
-    X- in (os.stdin)
-    X- fd (int - its the stdin stdout stderr file descriptors)
-X- clear screen
-- raw mode (open)
-- defer raw exit (panic too) (close)
-- size func (uses x/term) returns the size - doesnt store it
-- hide cursor
-- show cursor
-- defer show cursor (panic too)
-- move cursor
-- write
-- color
-- read key input
-
-## Key
-need to capture key input
-
 ## Cell:
     - rune
     - fg

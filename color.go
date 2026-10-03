@@ -15,13 +15,13 @@ type Color string
 
 // Colors
 const (
-    Reset   Color = "\033[0m"
-    Black   Color = "\033[30m"
-    Red     Color = "\033[31m"
-    Green   Color = "\033[32m"
-    Yellow  Color = "\033[33m"
-    Blue    Color = "\033[34m"
-    Magenta Color = "\033[35m"
-    Cyan    Color = "\033[36m"
-    White   Color = "\033[37m"
+    Reset   Color = "\x1b[0m"
+    Black   Color = "\x1b[30m"
+    Red     Color = "\x1b[31m"
+    Green   Color = "\x1b[32m"
+    Yellow  Color = "\x1b[33m"
+    Blue    Color = "\x1b[34m"
+    Magenta Color = "\x1b[35m"
+    Cyan    Color = "\x1b[36m"
+    White   Color = "\x1b[37m"
 )
