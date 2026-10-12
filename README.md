@@ -6,11 +6,6 @@ The terminal layer is a driver for all underlying terminal manipulation.
 
 
 # TODO:
-## Cell:
-    - rune
-    - fg
-    - bg
-
 ## Screen Layer: handles the terminal rendering
 - screen struct:
     - term
