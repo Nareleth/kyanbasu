@@ -50,7 +50,7 @@ func (t *Term) Clear() {
 func (t *Term) CloseTerm() {
     term.Restore(t.fd, t.state)
     t.DisableAlternate()
-    t.SetColor(string(Reset))
+    t.SetColor(string(Color_Reset))
     t.ShowCursor()
     t.Flush()
 }
@@ -116,7 +116,14 @@ func (t *Term) ShowCursor() {
     t.out.WriteString("\x1b[?25h")
 }
 
+
 // Print a byte at cursor position
 func (t *Term) WriteByte(char byte) error {
     return t.out.WriteByte(char)
+}
+
+
+// Print a formatted string at cursor position
+func (t *Term) WriteString(s string, args ...any) {
+    fmt.Fprintf(t.out, s, args...)
 }
