@@ -1,0 +1,17 @@
+{
+    "World_Size": 100,
+
+    "tiles": {
+        "grass": {
+            "Char": ".",
+            "FG":   "Kyanbasu.Color_Green"
+        },
+
+        "water": {
+            "Char": "~",
+            "FG":   "Kyanbasu.Color_Blue"
+        }
+
+    }
+}
+

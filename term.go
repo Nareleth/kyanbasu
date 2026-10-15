@@ -50,7 +50,7 @@ func (t *Term) Clear() {
 func (t *Term) CloseTerm() {
     term.Restore(t.fd, t.state)
     t.DisableAlternate()
-    t.SetColor(string(Color_Reset))
+    t.SetColor(Color_Reset)
     t.ShowCursor()
     t.Flush()
 }
@@ -106,7 +106,7 @@ func (t *Term) ReadKey() byte {
 
 
 // Set Terminal Color State for printing
-func (t *Term) SetColor(color string) {
+func (t *Term) SetColor(color Color) {
     fmt.Fprint(t.out, color)
 }
 
@@ -120,6 +120,17 @@ func (t *Term) ShowCursor() {
 // Print a byte at cursor position
 func (t *Term) WriteByte(char byte) error {
     return t.out.WriteByte(char)
+}
+
+
+// Print a rune at cursor position
+/*
+func (t *Term) WriteRune(r rune) (int, error) {
+    return t.out.WriteRune(r)
+}
+*/
+func (t *Term) WriteRune(r rune) {
+    fmt.Fprintf(t.out, "%c", r)
 }
 
 

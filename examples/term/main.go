@@ -40,9 +40,9 @@ func NewPCursor(char byte, fg kyanbasu.Color, x, y int) *PCursor {
 // Draw the PCursor
 func (c *PCursor) Draw(t *kyanbasu.Term) {
     t.Move(c.X, c.Y)
-    t.SetColor(string(c.FG))
+    t.SetColor(c.FG)
     t.WriteByte(c.Char)
-    t.SetColor(string(kyanbasu.Color_Reset))
+    t.SetColor(kyanbasu.Color_Reset)
 }
 
 // Move the PCursor

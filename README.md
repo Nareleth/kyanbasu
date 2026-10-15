@@ -15,6 +15,7 @@ The terminal layer is a driver for all underlying terminal manipulation.
 - resize
 - diff logic
 - flush
+- additional drawing logic (filling areas like rectangles)
 
 ## Window Layer: what game code interacts with to set cells
 - struct:
@@ -32,3 +33,11 @@ The terminal layer is a driver for all underlying terminal manipulation.
 - subwindow func (init)
 - relative adding cells
 - z layering
+
+## Extra:
+- fps
+- input layer (easier time establishing a goroutine for key input)
+
+## Bugs:
+### Term:
+- cant ctrl+c to close (implement a fix in input layer)
