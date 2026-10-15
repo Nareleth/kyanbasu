@@ -10,34 +10,91 @@
 package main
 
 import (
-    "fmt"
-    "io"
-    "os"
+    //"fmt"
+    //"io"
+    "math/rand/v2"
+    //"os"
     "time"
     "github.com/Nareleth/kyanbasu"
 )
 
 const(
-    FPS             = 30                // Set FPS
-    Tilemap_File    = "tilemap.json"      // Input tilemap file
+    FPS             = 30                                // Set FPS
+    Tilemap_File    = "tilemap.json"                    // Input tilemap file
     // TEMP
-    World_Size = 10
+    World_Size = 100
 )
+
+// Global vars
+var Seed = rand.New(rand.NewPCG(12345, 0))   // Define the seed values
 
 // TEMP
 var tileGrass = kyanbasu.Cell{Char: '.', FG: kyanbasu.Color_Green,}
+var tileWater = kyanbasu.Cell{Char: '~', FG: kyanbasu.Color_Blue,}
 
 
-// Draw the visible tile map
-func DrawMap(screen *kyanbasu.Screen) {
-    for y := 1; y < 10; y++ {
-        for x := 1; x < 10; x++ {
-            screen.SetCell(x, y, tileGrass)
+// Generate a very simple tilemap
+func GenerateMap() [][]kyanbasu.Cell {
+    // Initialize empty world
+    world := make([][]kyanbasu.Cell, World_Size)
+
+    // Create ocean layer
+    for y := range world {
+        world[y] = make([]kyanbasu.Cell, World_Size)
+        for x := range world[y] {
+            world[y][x] = tileWater
         }
     }
+
+    // Add land
+    for y := range world {
+        for x := range world[y] {
+            n := Seed.IntN(100)
+            switch {
+                case n >= 20:
+                    world[y][x] = tileGrass
+            }
+
+        }
+
+    }
+    
+    // Return the map
+    return world
 }
 
 
+// Draw the Tilemap on the screen buffer
+func SetMap(screen *kyanbasu.Screen, tilemap [][]kyanbasu.Cell) {
+    // Set visible dimensions
+    cvx, cvy := 0, 0
+
+    for y := 0; y < screen.Height; y++ {
+        for x := 0; x < screen.Width; x++ {
+            // Assign camera coords to tiles
+            mapX := cvx + x
+            mapY := cvy + y
+
+            // Skip drawing tiles that dont exist
+            if mapX >= World_Size || mapY >= World_Size {
+                continue
+            }
+
+            screen.SetCell(x, y, tilemap[mapY][mapX])
+        }
+    }
+
+    /*
+    for y := range tilemap {
+        for x := range tilemap [y] {
+            screen.SetCell(x, y, tilemap[y][x])
+        }
+    }
+    */
+}
+
+
+/*
 // Read our tilemap file
 func ReadFile(file string) {
     // Open file 
@@ -59,6 +116,7 @@ func ReadFile(file string) {
 
     // need to somehow initialize the tiles as cells. maybe make a tile type? or reuse cell?
 }
+*/
 
 
 func main() {
@@ -71,11 +129,13 @@ func main() {
     screen := kyanbasu.NewScreen(term)
 
     // Read the tilemap file
-    ReadFile(Tilemap_File)
+    //ReadFile(Tilemap_File)
+
+    // Generate the Tilemap
+    tilemap := GenerateMap()
 
     // Draw the tilemap
-    DrawMap(screen)
-
+    SetMap(screen, tilemap)
 /*
     // Game loop
     for {

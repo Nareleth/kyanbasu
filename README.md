@@ -7,15 +7,17 @@ The terminal layer is a driver for all underlying terminal manipulation.
 
 # TODO:
 ## Screen Layer: handles the terminal rendering
-- screen struct:
-    - term
-    - width height (uses terms size func) 
-    - back buffer
-    - front buffer
+X- screen struct:
+    X- term
+    X- width height (uses terms size func) 
+    X- back buffer
+    X- front buffer
+X- diff logic
+X- flush
+- how to draw FG and BG
 - resize
-- diff logic
-- flush
 - additional drawing logic (filling areas like rectangles)
+- rename back and front lol i hate it
 
 ## Window Layer: what game code interacts with to set cells
 - struct:
@@ -41,3 +43,10 @@ The terminal layer is a driver for all underlying terminal manipulation.
 ## Bugs:
 ### Term:
 - cant ctrl+c to close (implement a fix in input layer)
+
+## Example:
+### Screen:
+- maybe add more map generation logic?
+- test writing BG folor with FG braille
+- Read JSON
+- potentially may wanna add a form of unmarshall method for cells
