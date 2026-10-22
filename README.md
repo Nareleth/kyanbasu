@@ -7,6 +7,8 @@ The terminal layer is a driver for all underlying terminal manipulation.
 
 # TODO:
 ## Screen Layer: handles the terminal rendering
+- Figured out how to get FG and BG but requires an entire color rework.
+
 X- screen struct:
     X- term
     X- width height (uses terms size func) 
