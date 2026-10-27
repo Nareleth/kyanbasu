@@ -38,16 +38,24 @@ func NewScreen(term *Term) *Screen {
 
 // Flush the screen buffer
 func (s *Screen) Flush() {
-    for y := range s.Front {
-        for x := range s.Front[y] {
-            if s.Front[y][x] != s.Back[y][x] {
-                s.Front[y][x] = s.Back[y][x]
+    for y := range s.Height {
+        for x := range s.Width {
+            this_cell := s.Back[y][x]
+            if this_cell != s.Front[y][x] {
                 s.Term.Move(x, y)
-                s.Term.SetColor(s.Front[y][x].FG)
+                s.Term.SetColor(this_cell.FG)
                 // How to set background color?
-                s.Term.WriteRune(s.Front[y][x].Char)
+                s.Term.WriteRune(this_cell.Char)
                 s.Term.SetColor(Color_Reset)
+                s.Front[y][x] = this_cell
             }
+        }
+    }
+
+    // Clear back buffer
+    for y := range s.Back {
+        for x:= range s.Back[y] {
+            s.Back[y][x] = Cell{Char: ' ', FG: Color_Reset, BG: Color_Reset}
         }
     }
 
