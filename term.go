@@ -94,14 +94,14 @@ func (t *Term) Move(x, y int) {
 
 
 // Read key input
-func (t *Term) ReadKey() byte {
+func (t *Term) ReadKey() Key {
     b := make([]byte, 1)
     _, err := os.Stdin.Read(b)
     if err != nil {
         panic(err)
     }    
 
-    return b[0]
+    return Key(b[0])
 }
 
 
