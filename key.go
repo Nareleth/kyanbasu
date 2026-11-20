@@ -12,6 +12,7 @@ type Key byte
 
 /* Consts */
 const (
+    // Lowercase alphanumeric
     Key_a Key = 'a'
     Key_b Key = 'b'
     Key_c Key = 'c'
@@ -39,6 +40,7 @@ const (
     Key_y Key = 'x'
     Key_z Key = 'z'
 
+    // Uppercase alphanumberic
     Key_A Key = 'A'
     Key_B Key = 'B'
     Key_C Key = 'C'
@@ -65,4 +67,19 @@ const (
     Key_X Key = 'X'
     Key_Y Key = 'Y'
     Key_Z Key = 'Z'
+
+    // Numeric Characters
+    Key_0 Key = '0'
+    Key_1 Key = '1'
+    Key_2 Key = '2'
+    Key_3 Key = '3'
+    Key_4 Key = '4'
+    Key_5 Key = '5'
+    Key_6 Key = '6'
+    Key_7 Key = '7'
+    Key_8 Key = '8'
+    Key_9 Key = '9'
+
+    // Special Characters
+    Key_Tilde Key = '~'
 )
