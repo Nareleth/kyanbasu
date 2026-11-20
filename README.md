@@ -23,12 +23,12 @@ X- flush
 
 ## Window Layer: what game code interacts with to set cells
 - struct:
-    - x y
-    - w h
+    X- x y
+    X- w h
     - Z (z layer)
     - hidden bool (is it shown?)
     - cells array
-- newwindow
+X- newwindow
 - logical pen? (to write within the window without moving the term cursor)
 - draw border (apparently it can be done way cleaner than what ive been doing)
 
