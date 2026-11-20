@@ -15,6 +15,9 @@ func main() {
     window1 := kyanbasu.NewWindow(screen, 0,  0, 20, 10)
     window2 := kyanbasu.NewWindow(screen, 22, 0, 20, 10)
 
+    window1.DrawBorder()
+    window2.DrawBorder()
+
 
     // Draw in window
     window1.WriteString(0, 0, "Hello")

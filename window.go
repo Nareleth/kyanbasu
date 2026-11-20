@@ -27,6 +27,40 @@ func NewWindow(screen *Screen, x,y,w,h int) *Window {
 
 
 /* Methods */
+// Draw the border around the window
+func (w *Window) DrawBorder() {
+    left    := -1
+    right   := w.Width -2
+    top     := -1
+    bottom  := w.Height -2
+
+    var (
+        border_row = Cell{Char: RuneBoxLightRow}
+        border_col = Cell{Char: RuneBoxLightCol}
+        border_nw  = Cell{Char: RuneBoxLightNW}
+        border_ne  = Cell{Char: RuneBoxLightNE}
+        border_sw  = Cell{Char: RuneBoxLightSW}
+        border_se  = Cell{Char: RuneBoxLightSE}
+    ) 
+
+    for x := 0; x < right; x++ {
+        w.SetCell(x, top,       border_row)
+        w.SetCell(x, bottom,    border_row)
+    }
+
+    for y := 0; y < bottom; y++ {
+        w.SetCell(left,    y,  border_col)
+        w.SetCell(right,   y,  border_col)
+    }
+
+
+    w.SetCell(left,     top,        border_nw)
+    w.SetCell(right,    top,        border_ne)
+    w.SetCell(left,     bottom,     border_sw)
+    w.SetCell(right,     bottom,    border_se)
+}
+
+
 // Write a cell to a relative position in the window.
 func (w *Window) SetCell(x, y int, cell Cell) {
     if cell.FG == "" {
@@ -37,8 +71,13 @@ func (w *Window) SetCell(x, y int, cell Cell) {
         cell.BG = Color_Reset
     }
 
-    absX := w.X + x
-    absY := w.Y + y
+    absX := w.X + x +1
+    absY := w.Y + y +1
+
+    // Clamp coordinates within the screen
+    if absX < w.X || absY < w.Y || absX >= w.X + w.Width || absY >= w.Y + w.Height {
+        return
+    }
 
     w.Screen.Back[absY][absX] = cell
 }
@@ -46,8 +85,13 @@ func (w *Window) SetCell(x, y int, cell Cell) {
 
 // Write formated text to a relative position in the window.
 func (w *Window) WriteString(x,y int, s string, args ...any) {
-    absX := w.X + x
-    absY := w.Y + y
+    absX := w.X + x +1
+    absY := w.Y + y +1
+
+    // Clamp coordinates within the screen
+    if absX < w.X || absY < w.Y || absX >= w.X + w.Width || absY >= w.Y + w.Height {
+        return
+    }
 
     w.Screen.Term.Move(absX, absY)
     w.Screen.Term.WriteString(s, args...)
