@@ -10,6 +10,7 @@ type Window struct {
     Screen          *Screen
     X,Y             int
     Width,Height    int
+    Visible         bool
 }
 
 
@@ -22,6 +23,7 @@ func NewWindow(screen *Screen, x,y,w,h int) *Window {
         Y:          y,
         Width:      w,
         Height:     h,
+        Visible:    true,
     }
 }
 
@@ -29,6 +31,10 @@ func NewWindow(screen *Screen, x,y,w,h int) *Window {
 /* Methods */
 // Draw the border around the window
 func (w *Window) DrawBorder() {
+    if !w.Visible {
+        return
+    }
+
     left    := -1
     right   := w.Width -2
     top     := -1
@@ -61,8 +67,17 @@ func (w *Window) DrawBorder() {
 }
 
 
+// Hide the window.
+func (w *Window) Hide() {
+   w.Visible = false 
+}
+
 // Write a cell to a relative position in the window.
 func (w *Window) SetCell(x, y int, cell Cell) {
+    if !w.Visible {
+        return
+    }
+
     if cell.FG == "" {
         cell.FG = Color_Reset
     }
@@ -83,8 +98,18 @@ func (w *Window) SetCell(x, y int, cell Cell) {
 }
 
 
+// Show the window if it was hidden.
+func (w *Window) Show() {
+    w.Visible = true
+}
+
+
 // Write formated text to a relative position in the window.
 func (w *Window) WriteString(x,y int, s string, args ...any) {
+    if !w.Visible {
+        return
+    }
+
     absX := w.X + x +1
     absY := w.Y + y +1
 

@@ -7,31 +7,38 @@ import (
 
 
 func main() {
+    // Initialize term
     term := kyanbasu.NewTerm()
     defer term.CloseTerm()
 
+    // Initialize screen
     screen := kyanbasu.NewScreen(term)
 
+    // Init windows
     window1 := kyanbasu.NewWindow(screen, 0,  0, 20, 10)
     window2 := kyanbasu.NewWindow(screen, 22, 0, 20, 10)
 
-    window1.DrawBorder()
-    window2.DrawBorder()
-
-
-    // Draw in window
-    window1.WriteString(0, 0, "Hello")
-    window2.WriteString(0, 0, "World!")
 
     // Loop
-    // Temp commenting until i remember to add input ending
-    /*
-    for {
-        screen.Flush()
-        time.Sleep(5 * time.Second)
-    }
-    */
+    for t := 0; t < 5; t++ {
 
-    screen.Flush()
-    time.Sleep(5 * time.Second)
+        if t == 2 {
+            window2.Hide()
+        }
+
+        // Render Borders
+        window1.DrawBorder()
+        window2.DrawBorder()
+
+        // Render text
+        window1.WriteString(0, 0, "Hello")
+        window2.WriteString(0, 0, "World!")
+
+        // Flush
+        screen.Flush()
+
+        // End frame
+        time.Sleep(1 * time.Second)
+    }
+
 }
